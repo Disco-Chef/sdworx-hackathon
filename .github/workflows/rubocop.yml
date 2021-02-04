@@ -1,0 +1,53 @@
+name: Rails tests
+on: [push,pull_request]
+jobs:
+  rubocop-test:
+    name: Rubocop
+    runs-on: ubuntu-18.04
+    services:
+      postgres:
+        image: postgres:10
+          # The postgres container requires the postgres user to be setup with a password in order to start it due to security
+          # reasons
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+      - name: set ruby rails
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          DATABASE_URL: postgres://postgres:@localhost:5432/test
+          RAILS_ENV: test
+        run: |
+          yarn install
+          gem install bundler:2.1.4
+          bundle install --no-deployment --jobs 4 --retry 3
+          rails db:create db:migrate
+      - name: Install Rubocop
+        run: gem install rubocop
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply rubocop lint
+          commit_user_name: gkosmo # defaults to "GitHub Actions"
+          commit_user_email: gkosmo1@hotmail.com # defaults to "actions@github.com"
+      - name: Check code
+        run: |
+          rubocop -a --fail-level F
+          git config --local user.email "gkosmo1@hotmail.com"
+          git config --local user.name "gkosmo"
