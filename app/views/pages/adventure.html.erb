@@ -3,7 +3,7 @@
     <h3>🤠 Bad Guys: </h3>
     <small>Your bad guys are the ways you keep yourself from your goals </small>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.bad_guys.empty? %> ">
-      <%= render 'adventures/bad_guy_form', bad_guy: @new_bad_guy%>
+      <%= render 'adventures/bad_guy_form', bad_guy: @new_bad_guy %>
     </div>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.bad_guys.empty? %> ">
       <ul class="list-group list-group-flush">
@@ -15,6 +15,7 @@
     </div>
   </div>
   <div class="mb-3" data-controller="toggle-display">
+    <h3>📝 Quests: </h3>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.quests.empty? %> ">
       <%= render 'adventures/quest_form', quest: @new_quest %>
     </div>
@@ -30,6 +31,7 @@
     </div>
   </div>
   <div class="mb-3" data-controller="toggle-display">
+    <h3>⭐ Power Ups: </h3>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.power_ups.empty? %> ">
       <%= render 'adventures/power_up_form', power_up: @new_power_up %>
     </div>
