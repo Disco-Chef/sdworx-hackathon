@@ -34,6 +34,11 @@ class ProfilesController < ApplicationController
     render json: {name: name }
   end
 
+  def fetch_origin_story
+    story = Profile.get_random_story(params[:nickname])
+    render json: {story: story }
+  end
+
   private
 
   def profile_params
