@@ -27,28 +27,28 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.6
-      - name: set ruby rails
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - name: Bundle Install
+    - name: Bundle Install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+      - name: set ruby rails
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          DATABASE_URL: postgres://postgres:@localhost:5432/test
+          RAILS_ENV: test
         run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          env:
-            PGHOST: localhost
-            PGUSER: postgres
-            PGPASSWORD: postgres
-            DATABASE_URL: postgres://postgres:@localhost:5432/test
-            RAILS_ENV: test
-          run: |
-            yarn install
-            gem install bundler:2.1.4
-            bundle install --no-deployment --jobs 4 --retry 3
-            rails db:create db:migrate
+          yarn install
+          gem install bundler:2.1.4
+          bundle install --no-deployment --jobs 4 --retry 3
+          rails db:create db:migrate
       - name: Install Rubocop
         run: gem install rubocop
       - uses: stefanzweifel/git-auto-commit-action@v4
