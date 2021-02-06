@@ -1,1 +1,4 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+This app was made during a hackathon with spillberg and sdWorx.
+
+A live project can be found [here](http://sd-engage.herokuapp.com/)
+
