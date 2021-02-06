@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-flex flex-column align-items-center">
   <h1>My Dashboard</h1>
 
   <h2>🧙‍♂️ Teams 🧙‍♀️</h2>
@@ -7,53 +7,66 @@
       <li>team.id</li>
     <% end %>
   </ul>
+    <div class="row">
 
+      <div class="col d-flex flex-column align-items-center">
+        <h2>✔ Completed Quests ✔</h2>
+        <% @completed_quests.each do |completed_quest| %>
+          <div class="card mb-5">
+            <h3><s><strong><%= completed_quest.name.capitalize %></strong></s></h3>
+            <p><%= completed_quest.description %></p>
+            <h3>Received: <%= completed_quest.xp %> XP</h3>
+          </div>
+        <% end %>
+      </div>
 
-  <h2>✔ Completed Quests ✔</h2>
-  <% @completed_quests.each do |completed_quest| %>
-    <div class="card">
-      <h3><strong><%= completed_quest.name.capitalize %></strong></h3>
-      <p><%= completed_quest.description %></p>
-      <h3>Awarded: <%= completed_quest.xp %></h3>
+      <div class="col d-flex flex-column align-items-center">
+        <h2>📝 Active Quests 📝</h2>
+        <% @current_quests.each do |current_quest| %>
+          <div class="card mb-5">
+            <h3><strong><%= current_quest.name.capitalize %></strong></h3>
+            <p><%= current_quest.description %></p>
+            <h3>Reward: <%= current_quest.xp %> XP</h3>
+
+            <%= simple_form_for(current_quest, url: change_completion_rate_path, remote: true) do |f| %>
+              <%= f.input :id, as: :hidden %>
+              <%= f.input :completion_rate, as: :range, min: 0, max: 100, label: false %>
+              <%= f.button :submit, class: "btn btn-info"  %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
     </div>
-  <% end %>
 
+  <div class="row">
 
-  <h2>📝 Active Quests 📝</h2>
-  <% @current_quests.each do |current_quest| %>
-    <div class="card">
-      <h3><strong><%= current_quest.name.capitalize %></strong></h3>
-      <p><%= current_quest.description %></p>
-      <h3>Reward: <%= current_quest.xp %></h3>
-
-      <%= simple_form_for(current_quest, url: change_completion_rate_path, remote: true) do |f| %>
-        <%= f.input :id, as: :hidden %>
-        <%= f.input :completion_rate, as: :range, min: 0, max: 100, label: false %>
-        <%= f.button :submit, class: "btn btn-info"  %>
+    <div class="col d-flex flex-column align-items-center">
+      <h2>🤠 Most Wanted Baddies 🤠</h2>
+      <% @bad_guys.each do |bad_guy| %>
+        <div class="card mb-5">
+          <h3><strong><%= bad_guy.name.capitalize %></strong></h3>
+          <p><%= bad_guy.story %></p>
+          <h3>Reward: <%= bad_guy.xp %> XP</h3>
+          <h3>Total XP gained from previously slaying this baddie: <%= bad_guy.total_xp %> XP</h3>
+          <%= link_to "Neutralized!", defeat_bad_guy_path(bad_guy), method: :patch, class: "btn btn-info", remote: true  %>
+        </div>
       <% end %>
     </div>
-  <% end %>
 
-
-  <h2>🤠 Most Wanted Baddies 🤠</h2>
-  <% @bad_guys.each do |bad_guy| %>
-    <div class="card">
-      <h3><strong><%= bad_guy.name.capitalize %></strong></h3>
-      <p><%= bad_guy.story %></p>
-      <h3>Reward: <%= bad_guy.xp %></h3>
-      <h3>Total XP gained from previously slaying this baddie: <%= bad_guy.total_xp %></h3>
-      <%= link_to "Neutralized!", defeat_bad_guy_path(bad_guy), method: :patch, class: "btn btn-info", remote: true  %>
+    <div class="col d-flex flex-column align-items-center">
+      <h2>⭐ Power Ups! ⭐</h2>
+      <% @power_ups.each do |power_up| %>
+        <div class="card mb-5">
+          <h3><strong><%= power_up.name.capitalize %></strong></h3>
+          <p><%= power_up.description %></p>
+          <h3>Reward: <%= power_up.xp %> XP</h3>
+          <h3>Total XP gained from previously slaying this PowerUp: <%= power_up.total_xp %> XP</h3>
+          <%= link_to "Acquire PowerUp!", increase_power_up_path(power_up), method: :patch, class: "btn btn-info", remote: true %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
 
-  <h2>⭐ Power Ups! ⭐</h2>
-  <% @power_ups.each do |power_up| %>
-    <div class="card">
-      <h3><strong><%= power_up.name.capitalize %></strong></h3>
-      <p><%= power_up.description %></p>
-      <h3>Reward: <%= power_up.xp %></h3>
-      <h3>Total XP gained from previously slaying this PowerUp: <%= power_up.total_xp %></h3>
-      <%= link_to "Acquire PowerUp!", increase_power_up_path(power_up), method: :patch, class: "btn btn-info", remote: true %>
-    </div>
-  <% end %>
+  </div>
+
 </div>

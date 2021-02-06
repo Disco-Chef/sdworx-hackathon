@@ -31,5 +31,8 @@ power_up = chosen_vision.power_ups.create!(name: "The Giver of Sustenance", desc
 
 chosen_strategy = Strategy.last.chosen_strategies.create!(profile: profile, personal_strategic_goal: "Set up measuring points to quantify retention and loss")
 
-quest = chosen_strategy.quests.create!(name: "Seek Help", profile: profile, completion_rate: 0, xp: 5, completed: false, description: "Call for a crossover episode with Batman, Grey Cape and The Tick, to help with setting up the measurement methods!")
+quest1 = chosen_strategy.quests.create!(name: "Seek Help", profile: profile, completion_rate: 0, xp: 5, completed: false, description: "Call for a crossover episode with Batman, Grey Cape and The Tick, to help with setting up the measurement methods!")
 
+quest2 = chosen_strategy.quests.create!(name: "Give Help", profile: profile, completion_rate: 100, xp: 5, completed: true, description: "Superman wants some help with cleaning a dirty/unformatted csv!")
+
+smoky_goblin = BadGuy.create!(name: "Ciggie Goblin", story: "Ciggie Goblin is always peer-pressuring you to go for a ciggie break. Resist his temptations!", profile: Profile.first, xp: 2, total_xp: 0)
