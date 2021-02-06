@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_110102) do
+ActiveRecord::Schema.define(version: 2021_02_06_132830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,36 @@ ActiveRecord::Schema.define(version: 2021_02_06_110102) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "company_bad_guys", force: :cascade do |t|
+    t.string "name"
+    t.string "story"
+    t.integer "xp"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_bad_guys_on_company_id"
+  end
+
+  create_table "company_power_ups", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "company_id", null: false
+    t.integer "xp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_power_ups_on_company_id"
+  end
+
+  create_table "company_quests", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "xp"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_quests_on_company_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -178,6 +208,9 @@ ActiveRecord::Schema.define(version: 2021_02_06_110102) do
   add_foreign_key "chosen_strategies", "strategies"
   add_foreign_key "chosen_visions", "profiles"
   add_foreign_key "chosen_visions", "visions"
+  add_foreign_key "company_bad_guys", "companies"
+  add_foreign_key "company_power_ups", "companies"
+  add_foreign_key "company_quests", "companies"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "power_up_visions", "chosen_visions"
