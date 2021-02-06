@@ -8,17 +8,26 @@ class DashboardController < ApplicationController
 
     @teams = current_user.teams
     # @allies = current_user.allies
+    @chosen_strategies = current_user.profile.chosen_strategies
   end
 
-  def defeat_bad_guy(bad_guy)
-    bad_guy.total_xp += xp
+  def defeat_bad_guy
+    bad_guy = BadGuy.find(params[:id])
+    bad_guy.total_xp += bad_guy.xp
+    bad_guy.save!
+    redirect_to dashboard_index_path
   end
 
-  def increase_power_up(power_up)
+  def increase_power_up
+    power_up = PowerUp.find(params[:id])
     power_up.total_xp += xp
+    power_up.save!
   end
 
   def change_completion_rate
-
+    @quest = Quest.find(params["quest"]["id"])
+    @quest.completion_rate = params["quest"]["completion_rate"].to_i
+    @quest.save!
+    redirect_to dashboard_index_path
   end
 end
