@@ -1,0 +1,11 @@
+<%= simple_form_for power_up do |f| %>
+<%= f.input :name, hint: "blablablabla blablablalba" %>
+<%= f.input :description, hint: "blalbalblablalbalbalblbalba" %>
+<%= f.input :xp, hint: "between 1-100" %>
+<div class="d-flex align-items-center">
+  <%= f.button :submit, class: "btn btn-info" %>
+  <% if power_up.id.present? %>
+  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+  <% end %>
+</div>
+<% end %>
