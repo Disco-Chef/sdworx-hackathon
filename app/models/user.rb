@@ -5,4 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :company
   has_one :profile
+  before_validation :assign_company
+
+  private
+
+  def assign_company
+    self.company ||= Company.last
+  end
 end
