@@ -1,3 +1,11 @@
+QuestStrategy.destroy_all
+Quest.destroy_all
+BadGuy.destroy_all
+PowerUp.destroy_all
+ChosenVision.destroy_all
+ChosenStrategy.destroy_all
+Profile.destroy_all
+
 User.destroy_all
 Strategy.destroy_all
 Vision.destroy_all

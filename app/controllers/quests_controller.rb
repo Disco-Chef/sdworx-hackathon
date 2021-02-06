@@ -2,6 +2,8 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(params_quest)
     @quest.profile = current_user.profile
+    @quest.completed = false
+    @quest.completion_rate = 0
     if @quest.save!
       flash[:success] = "Quest successfully created"
       redirect_to adventure_path
