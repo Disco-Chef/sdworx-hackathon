@@ -1,5 +1,8 @@
 <div class="container">
-  <h1> Build your Alter-Ego </h1>
+  <div class="d-flex justify-content-between w-100">
+    <h1> Build your Alter-Ego </h1>
+    <%= link_to "how others see you", profile_path(@profile) %>
+  </div>
   <div data-controller="toggle-display">
     <div data-target="toggle-display.togglable" class="<%= 'd-none' if @profile.id.present? %> ">
       <%= render "profile_form", profile: @profile %>
@@ -40,7 +43,7 @@
           <% @profile.chosen_strategies.each do |strategy| %>
             <div data-controller="toggle-display">
 
-              <li data-target="toggle-display.togglable"  class="list-group-item"><%= strategy.personal_strategic_goal %>
+              <li class="list-group-item" data-target="toggle-display.togglable" ><%= strategy.personal_strategic_goal %>
                 <i class="fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="edit"> </i>
               </li>
               <div data-target="toggle-display.togglable" class="d-none mb-1">
@@ -49,7 +52,7 @@
             </div>
           <% end %>
         </ul>
-        <i class="fa fa-plus clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="Add a strategy"> </i>
+        <i class="fa fa-plus clickable mt-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="Add a strategy"> </i>
       </div>
     </div>
   <% end %>
