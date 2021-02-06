@@ -21,7 +21,7 @@
         <% if current_user.profile&.photo&.attached?%>
           <%= cl_image_tag current_user.profile&.photo&.key, class: "avatar dropdown-toggle" %>
         <%else%>
-          <%= image_tag "https://www.google.com/search?q=batman+icon&rlz=1C5CHFA_enBE881BE881&sxsrf=ALeKk015U9Ub3vWteUZ5wNAKCWIf5mXcVg:1612617482750&tbm=isch&source=iu&ictx=1&fir=kXcmI2COmNtOAM%252C-GWLVVlls0KYFM%252C_&vet=1&usg=AI4_-kR2GxFcFPhzLff_bfNc8UjMTQctQQ&sa=X&ved=2ahUKEwiK196hrNXuAhXL-aQKHSAuAVgQ9QF6BAgPEAE#imgrc=kXcmI2COmNtOAM", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <%= image_tag "http://icons.iconarchive.com/icons/diversity-avatars/avatars/1024/batman-icon.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <%end%>
       </li>
       <% else %>
