@@ -1,0 +1,12 @@
+<%= simple_form_for profile, remote: true do |f| %>
+  <%= f.input :nickname, placeholder: "Spider-man" %>
+  <%= f.input :secret_bio, as: :text, placeholder: "As a young man, I was bitten by a radio-active softaware engineered spider. I have at first played with my new powers by making web softwares left and right just for money. But then something really important happened, so I decided to work on my spidey-software skills as to be the best spider-engineer I could think of "%>
+  <%= f.input :photo, as: :file %>
+
+  <div class="d-flex align-items-center">
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <% if profile.id.present? %>
+      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+    <% end %>
+  </div>
+<% end %>
