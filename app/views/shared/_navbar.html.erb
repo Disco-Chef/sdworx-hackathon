@@ -18,7 +18,7 @@
         <%= link_to "New Adventures", adventure_path, class: "nav-link" %>
       </li>
       <li class="nav-item <%= 'active' if params[:controller] == 'profile' %>">
-        <%= link_to "Your Profile", main_profile_path, class: "nav-link" %>
+        <%= link_to "My Profile", main_profile_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown">
         <% if current_user.profile&.photo&.attached?%>
