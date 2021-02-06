@@ -1,14 +1,18 @@
 QuestStrategy.destroy_all
 Quest.destroy_all
 BadGuy.destroy_all
-PowerUp.destroy_all
+PowerUpVision.destroy_all
 ChosenVision.destroy_all
+PowerUp.destroy_all
 ChosenStrategy.destroy_all
 Profile.destroy_all
 
 User.destroy_all
 Strategy.destroy_all
 Vision.destroy_all
+CompanyBadGuy.destroy_all
+CompanyQuest.destroy_all
+CompanyPowerUp.destroy_all
 Company.destroy_all
 
 company = Company.create!(name: "The Newsroom")
