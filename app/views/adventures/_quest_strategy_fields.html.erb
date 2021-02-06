@@ -1,0 +1,4 @@
+<div class="nested-fields">
+  <%= f.association :chosen_strategy, collection: current_user.profile.chosen_strategies, label_method: :personal_strategic_goal, value_method: :id %>
+  <%= link_to_remove_association "remove associated strategy", f %>
+</div>

@@ -1,11 +1,14 @@
+<b> Create a Power-Up </b>
 <%= simple_form_for power_up do |f| %>
-<%= f.input :name, hint: "blablablabla blablablalba" %>
-<%= f.input :description, hint: "blalbalblablalbalbalblbalba" %>
-<%= f.input :xp, hint: "between 1-100" %>
-<div class="d-flex align-items-center">
-  <%= f.button :submit, class: "btn btn-info" %>
-  <% if power_up.id.present? %>
-  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-  <% end %>
-</div>
+  <%= f.input :name, hint: "it's like a pushup: something you don't want to do before, but after you're better and stronger" %>
+  <%= f.input :description, hint: "describe what you would do when you activate this power up" %>
+  <%= f.input :xp, hint: "between 1-100", input_html: { min: 0, max: 100 } %>
+  <div class="d-flex align-items-center">
+    <%= f.button :submit, class: "btn btn-info" %>
+    <% if power_up.id.present? %>
+      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+    <% else %>
+      <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+    <% end %>
+  </div>
 <% end %>

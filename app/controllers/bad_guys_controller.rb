@@ -1,7 +1,7 @@
 class BadGuysController < ApplicationController
-  
+
   def create
-    @bad_guy = Badguy.new(params_bad_guy)
+    @bad_guy = BadGuy.new(params_bad_guy)
     @bad_guy.profile = current_user.profile
     @profile = current_user.profile
     if @bad_guy.save
@@ -24,12 +24,12 @@ class BadGuysController < ApplicationController
         render 'edit'
       end
   end
-  
-  
+
+
   private
 
   def params_bad_guy
     params.require(:bad_guy).permit(:name,:story,:xp, :profile_id)
   end
-  
+
 end
