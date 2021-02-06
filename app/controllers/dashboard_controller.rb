@@ -28,7 +28,9 @@ class DashboardController < ApplicationController
   def change_completion_rate
     @quest = Quest.find(params["quest"]["id"])
     @quest.completion_rate = params["quest"]["completion_rate"].to_i
+    @quest.completed = true if @quest.completion_rate == 100
     @quest.save!
-    redirect_to dashboard_index_path
+    flash[:notice] = "Updated !"
+    redirect_to dashboard_index_path(anchor: "quest-#{@quest.id}")
   end
 end

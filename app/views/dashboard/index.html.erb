@@ -1,18 +1,12 @@
 <div class="container d-flex flex-column align-items-center">
   <h1>My Dashboard</h1>
 
-  <h2>🧙‍♂️ Teams 🧙‍♀️</h2>
-  <ul>
-    <% @teams.each do |team| %>
-      <li>team.id</li>
-    <% end %>
-  </ul>
     <div class="row">
 
-      <div class="col d-flex flex-column align-items-center">
+      <div class="col d-flex flex-column">
         <h2>✔ Completed Quests ✔</h2>
         <% @completed_quests.each do |completed_quest| %>
-          <div class="card mb-5">
+          <div class="card mb-5 p-2" id="quest-<%= completed_quest.id %>">
             <h3><s><strong><%= completed_quest.name.capitalize %></strong></s></h3>
             <p><%= completed_quest.description %></p>
             <h3>Received: <%= completed_quest.xp %> XP</h3>
@@ -20,18 +14,18 @@
         <% end %>
       </div>
 
-      <div class="col d-flex flex-column align-items-center">
+      <div class="col d-flex flex-column">
         <h2>📝 Active Quests 📝</h2>
         <% @current_quests.each do |current_quest| %>
-          <div class="card mb-5">
+          <div data-controller="quest" class="card mb-5 p-2" id="quest-<%= current_quest.id %>">
             <h3><strong><%= current_quest.name.capitalize %></strong></h3>
             <p><%= current_quest.description %></p>
             <h3>Reward: <%= current_quest.xp %> XP</h3>
 
-            <%= simple_form_for(current_quest, url: change_completion_rate_path, remote: true) do |f| %>
+            <%= simple_form_for current_quest,as: :quest, url: change_completion_rate_path, method: :post,  remote: true do |f| %>
               <%= f.input :id, as: :hidden %>
-              <%= f.input :completion_rate, as: :range, min: 0, max: 100, label: false %>
-              <%= f.button :submit, class: "btn btn-info"  %>
+              <%= f.input :completion_rate, label: " <span data-quest-target='text'>Completion rate: #{current_quest.completion_rate} %</>".html_safe, as: :range, min: 0, max: 100, input_html: {data: { action: "change->quest#slide"}} %>
+              <%= f.button :submit, class: "btn btn-info d-none", data: { target: "quest.submit"}  %>
             <% end %>
           </div>
         <% end %>
@@ -44,7 +38,7 @@
     <div class="col d-flex flex-column align-items-center">
       <h2>🤠 Most Wanted Baddies 🤠</h2>
       <% @bad_guys.each do |bad_guy| %>
-        <div class="card mb-5">
+        <div class="card mb-5 p-2" >
           <h3><strong><%= bad_guy.name.capitalize %></strong></h3>
           <p><%= bad_guy.story %></p>
           <h3>Reward: <%= bad_guy.xp %> XP</h3>
