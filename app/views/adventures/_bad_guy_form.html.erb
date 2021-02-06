@@ -1,14 +1,14 @@
 <b> Create a bad guy </b>
 <%= simple_form_for bad_guy do |f| %>
-  <%= f.input :name, placeholder: "Cigarette Break Man "%>
-  <%= f.input :story, placeholder: "It calls me and force me to spending time destroying my health"%>
-  <%= f.input :xp, hint: "how much XP I receive everytime I defeat him", input_html: { min: 0, max: 100 } %>
-  <div class="d-flex align-items-center">
-    <%= f.button :submit, class: "btn btn-info" %>
-    <% if bad_guy.id.present? %>
-      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-    <% else %>
-      <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
-    <% end %>
-  </div>
+<%= f.input :name, placeholder: "Cigarette Break Man "%>
+<%= f.input :story, placeholder: "It calls me and force me to spending time destroying my health"%>
+<%= f.input :xp, hint: "How much XP ?", input_html: { min: 0, max: 100 } %>
+<div class="d-flex align-items-center">
+  <%= f.button :submit, class: "btn btn-info" %>
+  <% if bad_guy.id.present? %>
+  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+  <% else %>
+  <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+  <% end %>
+</div>
 <% end %>
