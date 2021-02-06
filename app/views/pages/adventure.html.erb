@@ -1,3 +1,43 @@
-<%= render 'adventures/quest_form', quest: @new_quest %>
-<%= render 'adventures/bad_guy_form', bad_guy: @new_bad_guy%>
-<%= render 'adventures/power_up_form', power_up: @new_power_up%>
+<div class="container">
+  <div class="mb-3" data-controller="toggle-display">
+    <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.bad_guys.empty? %> ">
+      <%= render 'adventures/bad_guy_form', bad_guy: @new_bad_guy%>
+    </div>
+    <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.bad_guys.empty? %> ">
+      <h3> Bad Guys: </h3>
+      <ul class="list-group list-group-flush">
+        <% current_user.profile.bad_guys.each do |bad_guy|%>
+          <li class="list-group-item"> <%= bad_guy.name %> </li>
+        <% end %>
+      </ul>
+       <i class="fa fa-plus clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="Add a bad guy"> </i>
+    </div>
+  </div>
+  <div class="mb-3" data-controller="toggle-display">
+    <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.quests.empty? %> ">
+      <%= render 'adventures/quest_form', quest: @new_quest %>
+    </div>
+    <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.quests.empty? %> ">
+      <h3> Quests: </h3>
+      <ul class="list-group list-group-flush">
+        <% current_user.profile.quests.each do |quest|%>
+          <li class="list-group-item"> <%= quest.name %> </li>
+        <% end %>
+      </ul>
+       <i class="fa fa-plus clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="Add a quest"> </i>
+    </div>
+  </div>
+  <div class="mb-3" data-controller="toggle-display">
+    <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.power_ups.empty? %> ">
+      <%= render 'adventures/power_up_form', power_up: @new_power_up %>
+    </div>
+    <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.power_ups.empty? %> ">
+      <h3> power_ups: </h3>
+      <ul class="list-group list-group-flush">
+        <% current_user.profile.power_ups.each do |power_up|%>
+          <li class="list-group-item"> <%= power_up.name %> </li>
+        <% end %>
+      </ul>
+       <i class="fa fa-plus clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="Add a power_up"> </i>
+    </div>
+</div>
