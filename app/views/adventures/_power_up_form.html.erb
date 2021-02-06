@@ -1,14 +1,43 @@
-<b> Create a Power-Up </b>
-<%= simple_form_for power_up do |f| %>
-<%= f.input :name, placeholder: "It's like a pushup: something you don't want to do before, but after you're better and stronger" %>
-<%= f.input :description, placeholder: "Describe what you would do when you activate this power up" %>
-<%= f.input :xp, hint: "How much Xp ?", input_html: { min: 0, max: 100 } %>
-<div class="d-flex align-items-center">
-  <%= f.button :submit, class: "btn btn-info" %>
-  <% if power_up.id.present? %>
-  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-  <% else %>
-  <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+<div data-controller="adventure">
+  <b> Create a Power-Up </b>
+  <button type="button" class="btn btn-light btn-small" data-toggle="modal" data-target="#powerUpModal">
+    Choose from company's power ups
+  </button>
+  <%= simple_form_for power_up do |f| %>
+    <%= f.input :name, placeholder: "It's like a pushup: something you don't want to do before, but after you're better and stronger", input_html: { data: { target: "adventure.name"} } %>
+    <%= f.input :description, placeholder: "Describe what you would do when you activate this power up", input_html: { data: { target: "adventure.description"} }  %>
+    <%= f.input :xp, hint: "How much Xp do you receive whenever you activate it?", input_html: { min: 0, max: 100, data: { target: "adventure.xp"} } %>
+    <div class="d-flex align-items-center">
+      <%= f.button :submit, class: "btn btn-info" %>
+      <% if power_up.id.present? %>
+        <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+      <% else %>
+        <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+      <% end %>
+    </div>
   <% end %>
+
+  <div class="modal fade" id="powerUpModal" tabindex="-1" aria-labelledby="powerUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="powerUpModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b> Select from your Company's known Power Ups ⭐ </b>
+          <select  class="custom-select" name="power_up" id="power_up" data-action="change->adventure#powerUpChosen">
+            <%= current_user.company.company_power_ups.each do |power_up| %>
+              <option value="#power_up_<%= power_up.id%>" id="power_up_<%= power_up.id%>" data-name="<%= power_up.name%>" data-description="<%= power_up.description%>" data-xp="<%= power_up.xp%>"> <%= power_up.name %> </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="d-none" data-target="adventure.adventureBtnModal" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<% end %>

@@ -1,20 +1,50 @@
-<b> Create a Quest </b>
-<%= simple_form_for quest do |f| %>
-<%= f.input :name, placeholder: "Client hunter"%>
-<%= f.input :description, as: :text, placeholder: "Try to contact at least 20 new potential clients in 1 week" %>
-<div id="quest_strategies">
-  <%= f.simple_fields_for :quest_strategies do |chosen_strategy| %>
-  <%= render 'adventures/quest_strategy_fields', f: chosen_strategy %>
+<div data-controller="adventure">
+  <b> Create a Quest </b>
+  <button type="button" class="btn btn-light btn-small" data-toggle="modal" data-target="#questModal">
+    Choose from company's epic quests
+  </button>
+
+  <%= simple_form_for quest do |f| %>
+    <%= f.input :name, placeholder: "Client hunter", input_html: { data: { target: "adventure.name"} }%>
+    <%= f.input :description, as: :text, placeholder: "Try to contact at least 20 new potential clients in 1 week", input_html: { data: { target: "adventure.description"} } %>
+    <div id="quest_strategies">
+      <%= f.simple_fields_for :quest_strategies do |chosen_strategy| %>
+        <%= render 'adventures/quest_strategy_fields', f: chosen_strategy %>
+      <% end %>
+      <%= link_to_add_association 'Add an associated personnal strategy', f, :quest_strategies, partial: "adventures/quest_strategy_fields" %>
+    </div>
+    <%= f.input :xp, hint: "How much XP i will earn once i complete the quest ?", input_html: { min: 0, max: 100, data: { target: "adventure.xp"} } %>
+    <div class="d-flex align-items-center">
+      <%= f.button :submit, class: "btn btn-info" %>
+      <% if quest.id.present? %>
+       <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+      <% else %>
+        <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+      <% end %>
+    </div>
   <% end %>
-  <%= link_to_add_association 'Add an associated personnal strategy', f, :quest_strategies, partial: "adventures/quest_strategy_fields" %>
+
+  <div class="modal fade" id="questModal" tabindex="-1" aria-labelledby="questModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="questModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b> Select from your Company's known Quests 📝 </b>
+          <select  class="custom-select" name="quest" id="quest" data-action="change->adventure#questChosen">
+            <%= current_user.company.company_quests.each do |quest| %>
+              <option value="#quest_<%= quest.id%>" id="quest_<%= quest.id%>" data-name="<%= quest.name%>" data-description="<%= quest.description%>" data-xp="<%= quest.xp%>"> <%= quest.name %> </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="d-none" data-target="adventure.adventureBtnModal" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<%= f.input :xp, hint: "How much XP i will earn once i complete the quest ?", input_html: { min: 0, max: 100 } %>
-<div class="d-flex align-items-center">
-  <%= f.button :submit, class: "btn btn-info" %>
-  <% if quest.id.present? %>
-  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-  <% else %>
-  <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
-  <% end %>
-</div>
-<% end %>
