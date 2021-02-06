@@ -4,4 +4,7 @@ class PagesController < ApplicationController
   def home
   end
 
+  def adventure
+
+  end
 end
