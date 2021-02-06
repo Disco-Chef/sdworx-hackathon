@@ -1,12 +1,20 @@
+<b> Create a Quest </b>
 <%= simple_form_for quest do |f| %>
-<%= f.input :name, hint: "blablablabla  blablablalba" %>
-<%= f.input :xp, hint: "between 1-100" %>
-<%= f.input :description, hint: "balabblalbalblalbal" %>
-
-<div class="d-flex align-items-center">
-  <%= f.button :submit, class: "btn btn-info" %>
-  <% if quest.id.present? %>
-  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-  <% end %>
-</div>
+  <%= f.input :name, hint: "blablablabla  blablablalba" %>
+  <%= f.input :description, as: :text, hint: "Description of the whole text" %>
+  <div id="quest_strategies">
+    <%= f.simple_fields_for :quest_strategies do |chosen_strategy| %>
+      <%= render 'adventures/quest_strategy_fields', f: chosen_strategy %>
+    <% end %>
+    <%= link_to_add_association 'Add an associated personnal strategy', f, :quest_strategies, partial: "adventures/quest_strategy_fields" %>
+  </div>
+  <%= f.input :xp, hint: "between 1-100", input_html: { min: 0, max: 100 } %>
+  <div class="d-flex align-items-center">
+    <%= f.button :submit, class: "btn btn-info" %>
+    <% if quest.id.present? %>
+      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+    <% else %>
+      <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+    <% end %>
+  </div>
 <% end %>
