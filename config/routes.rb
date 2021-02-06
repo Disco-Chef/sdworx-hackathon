@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :chosen_visions, only: [:create, :update]
   resources :chosen_strategies, only: [:create, :update]
   get 'profile', to: "profiles#new", as: :main_profile
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   resources :dashboard, only: :index
+  patch "defeat_bad_guy/:id", to: "dashboard#defeat_bad_guy", as: :defeat_bad_guy
+  patch "increase_power_up/:id", to: "dashboard#increase_power_up", as: :increase_power_up
+  patch "change_completion_rate/:id", to: "dashboard#change_completion_rate", as: :change_completion_rate
 end
