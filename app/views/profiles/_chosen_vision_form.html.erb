@@ -4,7 +4,7 @@
   <div class="d-flex align-items-center">
     <%= f.button :submit, class: "btn btn-info" %>
     <% if @chosen_vision.id.present? %>
-      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+      <i class="ml-2 fas fa-minus clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
     <% end %>
   </div>
 <% end %>

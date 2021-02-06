@@ -1,14 +1,46 @@
-<b> Create a bad guy </b>
-<%= simple_form_for bad_guy do |f| %>
-<%= f.input :name, placeholder: "Cigarette Break Man "%>
-<%= f.input :story, placeholder: "It calls me and force me to spending time destroying my health"%>
-<%= f.input :xp, hint: "How much XP ?", input_html: { min: 0, max: 100 } %>
-<div class="d-flex align-items-center">
-  <%= f.button :submit, class: "btn btn-info" %>
-  <% if bad_guy.id.present? %>
-  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-  <% else %>
-  <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+<div data-controller="adventure">
+  <b> Create a bad guy </b>
+  <button type="button" class="btn btn-light btn-small" data-toggle="modal" data-target="#badGuyModal">
+    Choose from company's bad guys
+  </button>
+
+  <%= simple_form_for bad_guy do |f| %>
+    <%= f.input :name, placeholder: "Cigarette Break Man", input_html: { data: { target: "adventure.name"} }%>
+    <%= f.input :story, placeholder: "It calls me and force me to spending time destroying my health", input_html: { data: { target: "adventure.story"} } %>
+    <%= f.input :xp, hint: "How much XP do you receive everytime you defeat him ? ", input_html: { min: 0, max: 100, data: { target: "adventure.xp"} } %>
+    <div class="d-flex align-items-center">
+      <%= f.button :submit, class: "btn btn-info" %>
+      <% if bad_guy.id.present? %>
+          <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+        <% else %>
+          <i class="fa fa-minus clickable ml-2" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close form"> </i>
+      <% end %>
+    </div>
   <% end %>
+
+
+  <div class="modal fade" id="badGuyModal" tabindex="-1" aria-labelledby="badGuyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="badGuyModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b> Select from your Company's known Bad Guys 🤠 </b>
+          <select  class="custom-select" name="bad_guy" id="bad_guy" data-action="change->adventure#badGuyChosen">
+            <%= current_user.company.company_bad_guys.each do |bad_guy| %>
+              <option value="#bad_guy_<%= bad_guy.id%>" id="bad_guy_<%= bad_guy.id%>" data-name="<%= bad_guy.name%>" data-story="<%= bad_guy.story%>" data-xp="<%= bad_guy.xp%>"> <%= bad_guy.name %> </option>
+            <% end %>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="d-none" data-target="adventure.adventureBtnModal" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
-<% end %>

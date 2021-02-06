@@ -4,7 +4,23 @@
     <title>SdworxHackathon</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= favicon_link_tag %>
 
+    <meta name="description" content="We're gamifying employees engagement. Let everybody be the super-hero, let them build their stories and have fun being the best they can">
+
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="Sdworx Engagement" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= image_url("sdworx.png") %>" />
+    <meta property="og:description" content="We're gamifying employees engagement. Let everybody be the super-hero, let them build their stories and have fun being the best they can" />
+    <meta property="og:site_name" content="SD Engage" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sdworx Engagement">
+    <meta name="twitter:description" content="We're gamifying employees engagement. Let everybody be the super-hero, let them build their stories and have fun being the best they can">
+    <meta name="twitter:image:src" content="<%= image_url("sdworx.png") %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 

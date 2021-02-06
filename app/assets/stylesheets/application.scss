@@ -24,3 +24,8 @@ a:hover {
 .clickable {
   cursor: pointer;
 }
+.active {
+  color: $orange;
+  border-bottom: 1px solid $orange;
+  text-decoration: none;
+}

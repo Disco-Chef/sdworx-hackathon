@@ -1,10 +1,11 @@
 <div class="container">
   <div class="mb-3" data-controller="toggle-display">
+    <h3>🤠 Bad Guys: </h3>
+    <small>Your bad guys are the ways you keep yourself from your goals </small>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.bad_guys.empty? %> ">
-      <%= render 'adventures/bad_guy_form', bad_guy: @new_bad_guy%>
+      <%= render 'adventures/bad_guy_form', bad_guy: @new_bad_guy %>
     </div>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.bad_guys.empty? %> ">
-      <h3> Bad Guys: </h3>
       <ul class="list-group list-group-flush">
         <% current_user.profile.bad_guys.each do |bad_guy|%>
           <li class="list-group-item"> <%= bad_guy.name %> </li>
@@ -14,11 +15,12 @@
     </div>
   </div>
   <div class="mb-3" data-controller="toggle-display">
+    <h3>📝 Quests: </h3>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.quests.empty? %> ">
       <%= render 'adventures/quest_form', quest: @new_quest %>
     </div>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.quests.empty? %> ">
-      <h3> Quests: </h3>
+      <small>A quest is something you do to bring yourself closer to an epic win for you and the place you work, something that makes you real proud </small>
       <ul class="list-group list-group-flush">
         <% current_user.profile.quests.each do |quest|%>
           <li class="list-group-item"> <%= quest.name %> </li>
@@ -28,11 +30,12 @@
     </div>
   </div>
   <div class="mb-3" data-controller="toggle-display">
+    <h3>⭐ Power Ups: </h3>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' unless current_user.profile.power_ups.empty? %> ">
       <%= render 'adventures/power_up_form', power_up: @new_power_up %>
     </div>
     <div data-target="toggle-display.togglable" class="<%= 'd-none' if current_user.profile.power_ups.empty? %> ">
-      <h3> power_ups: </h3>
+      <small>Power-ups are things that are easy to do, and make you feel good, but you don't always do. Think of them like a push-up </small>
       <ul class="list-group list-group-flush">
         <% current_user.profile.power_ups.each do |power_up|%>
           <li class="list-group-item"> <%= power_up.name %> </li>
@@ -40,4 +43,5 @@
       </ul>
        <i class="fa fa-plus clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="Add a power_up"> </i>
     </div>
+  </div>
 </div>
