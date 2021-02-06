@@ -1,12 +1,14 @@
 <%= simple_form_for profile, remote: true do |f| %>
-  <%= f.input :nickname, placeholder: "Spider-man" %>
-  <%= f.input :secret_bio, as: :text, placeholder: "As a young man, I was bitten by a radio-active softaware engineered spider. I have at first played with my new powers by making web softwares left and right just for money. But then something really important happened, so I decided to work on my spidey-software skills as to be the best spider-engineer I could think of "%>
-  <%= f.input :photo, as: :file %>
+  <div data-controller="fetch-random">
+    <%= f.input :nickname, label: "Nickname  <i class='fas fa-pencil-alt clickable' data-action='click->fetch-random#fetch' data-toggle='tooltip' data-url='/fetch_nickname' data-placement='top' title='fetch a random nickname'> </i>".html_safe, placeholder: "Spider-man", input_html: {data: { target: "fetch-random.inputName"} } %>
+    <%= f.input :secret_bio, as: :text, label: "Origin Story  <i class='fas fa-pencil-alt clickable' data-action='click->fetch-random#fetchStory' data-toggle='tooltip' data-url='/fetch_origin_story' data-placement='top' title='fetch a random origin story'> </i>".html_safe, placeholder: "As a young man, I was bitten by a radio-active softaware engineered spider. I have at first played with my new powers by making web softwares left and right just for money. But then something really important happened, so I decided to work on my spidey-software skills as to be the best spider-engineer I could think of ", input_html: {data: { target: "fetch-random.inputStory"} } %>
+    <%= f.input :photo, as: :file %>
 
-  <div class="d-flex align-items-center">
-    <%= f.button :submit, class: "btn btn-primary" %>
-    <% if profile.id.present? %>
-      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
-    <% end %>
+    <div class="d-flex align-items-center">
+      <%= f.button :submit, class: "btn btn-primary" %>
+      <% if profile.id.present? %>
+        <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+      <% end %>
+    </div>
   </div>
 <% end %>

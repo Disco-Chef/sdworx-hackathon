@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+
   def new
     @profile = current_user.profile || Profile.new
     @chosen_vision = current_user.profile&.chosen_vision || ChosenVision.new
@@ -19,7 +20,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
   end
 
-
   def update
     @profile = current_user.profile
     if @profile.update(profile_params)
@@ -29,6 +29,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def fetch_nickname
+    name = Faker::Superhero.name
+    render json: {name: name }
+  end
+
+  def fetch_origin_story
+    story = Profile.get_random_story(params[:nickname])
+    render json: {story: story }
+  end
 
   private
 

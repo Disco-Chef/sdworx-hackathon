@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   resources :profiles, except: [:edit]
+  get 'fetch_nickname', to: "profiles#fetch_nickname"
+  get 'fetch_origin_story', to: "profiles#fetch_origin_story"
   resources :chosen_visions, only: [:create, :update]
   resources :chosen_strategies, only: [:create, :update]
   resources :bad_guys, only: [:create, :update]
