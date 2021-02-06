@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :company
   has_one :profile
+  has_many :memberships
+  has_many :teams, through: :memberships
 end

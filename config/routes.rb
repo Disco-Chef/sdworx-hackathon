@@ -10,5 +10,11 @@ Rails.application.routes.draw do
   resources :power_ups, only: [:create, :update]
   get 'adventures', to: "pages#adventure", as: :adventure
   get 'profile', to: "profiles#new", as: :main_profile
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :dashboard, only: :index
+  patch "defeat_bad_guy/:id", to: "dashboard#defeat_bad_guy", as: :defeat_bad_guy
+  patch "increase_power_up/:id", to: "dashboard#increase_power_up", as: :increase_power_up
+
+
+  patch "change_completion_rate", to: "dashboard#change_completion_rate", as: :change_completion_rate
 end
