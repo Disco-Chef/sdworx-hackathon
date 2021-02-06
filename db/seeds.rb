@@ -1,15 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 Strategy.destroy_all
 Vision.destroy_all
 Company.destroy_all
+
 company = Company.create!(name: "The Newsroom")
+
 user_charlie = User.create!(
   email: "charlie@newsroom.com",
   password: "123123",
@@ -27,3 +22,17 @@ strategies = ["Grow shareholder value", "Best value for the cost", "    Acquire 
 strategies.each do |strategy|
   Strategy.create company: company, name: strategy
 end
+
+profile = Profile.create!(user: user_will, nickname: "Spider-Man", secret_bio: "As a young man, I was bittne by a radio-active re-engineered-dna spider. I have at first played with my new powers by making web softwares left and right just for money. But then, something really important happened, so I decided to work on my spidey-software skills to be the best spider-engineer I can think of!" )
+
+chosen_vision = Vision.first.chosen_visions.create!(motto: "We bring each other up and bring down those who aim to solely bring down others.", profile: profile)
+
+power_up = chosen_vision.power_ups.create!(name: "The Giver of Sustenance", description: "Awarded for thinking of your buddies' food needs/wants and fulfilling them!", profile: profile, xp: 3, total_xp: 0)
+
+chosen_strategy = Strategy.last.chosen_strategies.create!(profile: profile, personal_strategic_goal: "Set up measuring points to quantify retention and loss")
+
+quest1 = chosen_strategy.quests.create!(name: "Seek Help", profile: profile, completion_rate: 0, xp: 5, completed: false, description: "Call for a crossover episode with Batman, Grey Cape and The Tick, to help with setting up the measurement methods!")
+
+quest2 = chosen_strategy.quests.create!(name: "Give Help", profile: profile, completion_rate: 100, xp: 5, completed: true, description: "Superman wants some help with cleaning a dirty/unformatted csv!")
+
+smoky_goblin = BadGuy.create!(name: "Ciggie Goblin", story: "Ciggie Goblin is always peer-pressuring you to go for a ciggie break. Resist his temptations!", profile: Profile.first, xp: 2, total_xp: 0)
