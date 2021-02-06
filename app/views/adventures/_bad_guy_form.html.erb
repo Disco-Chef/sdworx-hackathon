@@ -1,0 +1,11 @@
+<%= simple_form_for bad_guy do |f| %>
+<%= f.input :name, hint: "blablalbalblalbabl blalblalbalbalbabl"%>
+<%= f.input :story, hint: "what is the story can be ?"%>
+<%= f.input :xp, hint: "between 1-100" %>
+<div class="d-flex align-items-center">
+  <%= f.button :submit, class: "btn btn-info" %>
+  <% if bad_guy.id.present? %>
+  <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+  <% end %>
+</div>
+<% end %>
