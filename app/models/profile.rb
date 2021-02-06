@@ -1,7 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
   has_one_attached :photo
-
+  has_one :chosen_vision
+  has_many :chosen_strategies
   has_many :quests
   has_many :bad_guys
   has_many :power_ups

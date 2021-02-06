@@ -1,53 +1,29 @@
-Profile.destroy_all
-Team.destroy_all
-Company.destroy_all
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+#
+# Examples:
+#
+#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
-
-the_newsroom = Company.create!(name: "The Newsroom")
-
+Strategy.destroy_all
+Vision.destroy_all
+Company.destroy_all
+company = Company.create!(name: "The Newsroom")
 user_charlie = User.create!(
   email: "charlie@newsroom.com",
   password: "123123",
-  company: the_newsroom
+  company: company
 )
-
 user_will = User.create!(
   email: "will@newsroom.com",
   password: "123123",
-  company: the_newsroom
+  company: company
 )
-# profile_will = Profile.create!(
-#   user: user_will,
-#   nickname: "The Grey Cape",
-#   secret_bio: "GC's sense of justice and nobility  came from an abusive father. His goal: To re-instate media as a credible, unbiased, just source of information!"
-# )
+vision = "To be the company that best understands and satisfies the product, service and self-fulfillment needs of people globally"
+Vision.create company: company, name: vision
 
-user_mac = User.create!(
-  email: "mac@newsroom.com",
-  password: "123123",
-  company: the_newsroom
-)
-
-user_sloan = User.create!(
-  email: "sloan@newsroom.com",
-  password: "123123",
-  company: the_newsroom
-)
-
-user_jim = User.create!(
-  email: "jim@newsroom.com",
-  password: "123123",
-  company: the_newsroom
-)
-
-user_don = User.create!(
-  email: "don@newsroom.com",
-  password: "123123",
-  company: the_newsroom
-)
-
-user_neal = User.create!(
-  email: "neal@newsroom.com",
-  password: "123123",
-  company: the_newsroom
-)
+strategies = ["Grow shareholder value", "Best value for the cost", "    Acquire new customers from innovative offerings", "    Improve employee retention"]
+strategies.each do |strategy|
+  Strategy.create company: company, name: strategy
+end

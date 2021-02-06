@@ -1,0 +1,10 @@
+<%= simple_form_for chosen_strategy do |f| %>
+  <%= f.input :personal_strategic_goal, hint: "how does #{@profile.nickname} creates adapts the companies strategies ?" %>
+  <%= f.association :strategy,label: "⬆️ is an adaptation of:", collection: current_user.company.strategies %>
+  <div class="d-flex align-items-center">
+    <%= f.button :submit, class: "btn btn-info" %>
+    <% if chosen_strategy.id.present? %>
+      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+    <% end %>
+  </div>
+<% end %>

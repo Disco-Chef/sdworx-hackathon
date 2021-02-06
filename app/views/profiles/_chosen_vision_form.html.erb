@@ -1,0 +1,10 @@
+<h3> How does <%= @profile.nickname %> helps the Vision </h3>
+<%= simple_form_for @chosen_vision do |f| %>
+  <%= f.input :motto,label: "#{@profile.nickname}'s motto is going to be:",placeholder: "with great powers come great responsibilities", hint: "knowing the vision of the company is <b> #{current_user.company.vision.name} </b>, what is your alter-ego motto".html_safe %>
+  <div class="d-flex align-items-center">
+    <%= f.button :submit, class: "btn btn-info" %>
+    <% if @chosen_vision.id.present? %>
+      <i class="ml-2 fas fa-pencil-alt clickable" data-action="click->toggle-display#toggleDiv" data-toggle="tooltip" data-placement="top" title="close edit"> </i>
+    <% end %>
+  </div>
+<% end %>
