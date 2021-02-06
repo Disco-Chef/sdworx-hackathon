@@ -20,8 +20,9 @@ class DashboardController < ApplicationController
 
   def increase_power_up
     power_up = PowerUp.find(params[:id])
-    power_up.total_xp += xp
+    power_up.total_xp += power_up.xp
     power_up.save!
+    redirect_to dashboard_index_path
   end
 
   def change_completion_rate

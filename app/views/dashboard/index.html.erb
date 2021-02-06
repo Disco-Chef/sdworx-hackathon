@@ -52,8 +52,9 @@
     <div class="card">
       <h3><strong><%= power_up.name.capitalize %></strong></h3>
       <p><%= power_up.description %></p>
-      <h3>Reward/Awarded: <%= power_up.total_xp %></h3>
-      <%= link_to "Acquire PowerUp!", increase_power_up_path(power_up), method: :patch  %>
+      <h3>Reward: <%= power_up.xp %></h3>
+      <h3>Total XP gained from previously slaying this PowerUp: <%= power_up.total_xp %></h3>
+      <%= link_to "Acquire PowerUp!", increase_power_up_path(power_up), method: :patch, class: "btn btn-info", remote: true %>
     </div>
   <% end %>
 </div>
