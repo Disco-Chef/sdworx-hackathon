@@ -9,7 +9,7 @@ class BadGuysController < ApplicationController
       redirect_to adventure_path
     else
       flash[:error] = "Something went wrong"
-      render :new
+      render 'new'
     end
   end
 
@@ -21,9 +21,10 @@ class BadGuysController < ApplicationController
         redirect_to adventure_path
       else
         flash[:error] = "Something went wrong"
-        render :new
+        render 'edit'
       end
   end
+  
   
   private
 
