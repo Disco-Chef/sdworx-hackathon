@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-
+  skip_before_action :authenticate_user!
   def new
     @profile = current_user.profile || Profile.new
     @chosen_vision = current_user.profile&.chosen_vision || ChosenVision.new
