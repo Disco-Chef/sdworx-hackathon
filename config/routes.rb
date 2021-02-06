@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: :index
   patch "defeat_bad_guy/:id", to: "dashboard#defeat_bad_guy", as: :defeat_bad_guy
   patch "increase_power_up/:id", to: "dashboard#increase_power_up", as: :increase_power_up
-  patch "change_completion_rate/:id", to: "dashboard#change_completion_rate", as: :change_completion_rate
+
+
+  patch "change_completion_rate", to: "dashboard#change_completion_rate", as: :change_completion_rate
 end

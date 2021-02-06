@@ -10,13 +10,11 @@ class DashboardController < ApplicationController
     # @allies = current_user.allies
   end
 
-  def defeat_bad_guy
-    bad_guy = BadGuy.find(params[:id])
+  def defeat_bad_guy(bad_guy)
     bad_guy.total_xp += xp
   end
 
-  def increase_power_up
-    power_up = PowerUp.find(params[:id])
+  def increase_power_up(power_up)
     power_up.total_xp += xp
   end
 
