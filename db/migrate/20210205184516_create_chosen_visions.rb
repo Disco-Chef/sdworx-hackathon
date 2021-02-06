@@ -3,7 +3,7 @@ class CreateChosenVisions < ActiveRecord::Migration[6.0]
     create_table :chosen_visions do |t|
       t.string :motto
       t.references :profile, null: false, foreign_key: true
-
+      t.references :vision, null: false, foreign_key: true
       t.timestamps
     end
   end

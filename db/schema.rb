@@ -59,9 +59,11 @@ ActiveRecord::Schema.define(version: 2021_02_05_184948) do
   create_table "chosen_visions", force: :cascade do |t|
     t.string "motto"
     t.bigint "profile_id", null: false
+    t.bigint "vision_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_chosen_visions_on_profile_id"
+    t.index ["vision_id"], name: "index_chosen_visions_on_vision_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -173,6 +175,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_184948) do
   add_foreign_key "chosen_strategies", "profiles"
   add_foreign_key "chosen_strategies", "strategies"
   add_foreign_key "chosen_visions", "profiles"
+  add_foreign_key "chosen_visions", "visions"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "power_up_visions", "chosen_visions"
