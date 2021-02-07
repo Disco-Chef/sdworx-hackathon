@@ -1,8 +1,8 @@
 <div class="card mb-5 p-2 w-100" id="power-up-<%= power_up.id %>">
   <h3><strong><%= power_up.name.capitalize %></strong></h3>
   <p class="text-muted"><%= power_up.description %></p>
-  <p>Reward: <%= power_up.xp %> XP</p>
   <p>Total XP gained from previously slaying this PowerUp: <strong> <%= power_up.total_xp %> XP </strong></p>
+  <p>Reward: <%= power_up.xp %> XP</p>
   <% if params[:controller] == "dashboard" %>
     <%= link_to "Acquire PowerUp!", increase_power_up_path(power_up), method: :patch, class: "btn btn-info", remote: true %>
   <% end %>

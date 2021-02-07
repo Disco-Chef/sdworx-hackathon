@@ -9,7 +9,10 @@ class PowerUpsController < ApplicationController
       redirect_to adventure_path
     else
       flash[:error] = "Something went wrong"
-      render :new
+      @new_bad_guy = BadGuy.new
+      @new_power_up = @power_up
+      @new_quest = Quest.new
+      render "pages/adventure"
     end
   end
 
