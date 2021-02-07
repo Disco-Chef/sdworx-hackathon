@@ -4,5 +4,4 @@ class Strategy < ApplicationRecord
   has_many :profiles, through: :chosen_strategies
 
   validates :name, presence: true
-  validates :description, presence: true
 end
