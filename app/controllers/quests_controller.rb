@@ -12,7 +12,7 @@ class QuestsController < ApplicationController
       @new_bad_guy = BadGuy.new
       @new_power_up = PowerUp.new
       @new_quest = @quest
-      render adventure_path
+      render "pages/adventure"
     end
   end
 
