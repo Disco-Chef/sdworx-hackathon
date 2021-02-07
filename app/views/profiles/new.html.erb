@@ -1,6 +1,11 @@
 <div class="container">
   <div class="d-flex justify-content-between w-100">
     <h1> Build your Alter-Ego </h1>
+    <% if @profile&.photo&.attached?%>
+        <%= cl_image_tag @profile&.photo&.key, class: "avatar-large" %>
+      <%else%>
+        <%= image_tag "http://icons.iconarchive.com/icons/diversity-avatars/avatars/1024/batman-icon.png", class: "avatar-large" %>
+      <%end%>
     <%= link_to "how others see you", profile_path(@profile) if @profile&.chosen_strategies.present? %>
   </div>
   <div data-controller="toggle-display">
