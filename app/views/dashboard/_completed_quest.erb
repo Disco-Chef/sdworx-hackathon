@@ -1,0 +1,19 @@
+<div class="card mb-5 p-2" id="quest-<%= quest.id %>">
+  <h3><s><strong><%= quest.name.capitalize %></strong></s></h3>
+  <p class="text-muted"><%= quest.description %></p>
+  <div class="d-flex w-100 justify-content-between">
+    <p>Received: <strong> <%= quest.xp %> XP </strong></p>
+    <% if quest.chosen_strategies.present? %>
+      <div class="dropdown">
+        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="quest_dropdown_<%= quest.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            see associated strategies
+        </button>
+        <div class="dropdown-menu" aria-labelledby="quest_dropdown_<%= quest.id %>">
+          <% quest.chosen_strategies.each do |strategy| %>
+            <p class="text-small text-muted"> <%= strategy.personal_strategic_goal %> </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

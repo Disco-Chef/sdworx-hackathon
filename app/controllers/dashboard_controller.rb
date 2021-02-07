@@ -15,14 +15,14 @@ class DashboardController < ApplicationController
     bad_guy = BadGuy.find(params[:id])
     bad_guy.total_xp += bad_guy.xp
     bad_guy.save!
-    redirect_to dashboard_index_path
+    redirect_to dashboard_index_path(anchor: "bad-guy-#{bad_guy.id}")
   end
 
   def increase_power_up
     power_up = PowerUp.find(params[:id])
     power_up.total_xp += power_up.xp
     power_up.save!
-    redirect_to dashboard_index_path
+    redirect_to dashboard_index_path(anchor: "power-up-#{power_up.id}")
   end
 
   def change_completion_rate

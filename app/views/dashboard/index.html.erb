@@ -6,28 +6,14 @@
       <div class="col d-flex flex-column">
         <h2>✔ Completed Quests ✔</h2>
         <% @completed_quests.each do |completed_quest| %>
-          <div class="card mb-5 p-2" id="quest-<%= completed_quest.id %>">
-            <h3><s><strong><%= completed_quest.name.capitalize %></strong></s></h3>
-            <p><%= completed_quest.description %></p>
-            <h3>Received: <%= completed_quest.xp %> XP</h3>
-          </div>
+          <%= render "completed_quest", quest: completed_quest %>
         <% end %>
       </div>
 
       <div class="col d-flex flex-column">
         <h2>📝 Active Quests 📝</h2>
         <% @current_quests.each do |current_quest| %>
-          <div data-controller="quest" class="card mb-5 p-2" id="quest-<%= current_quest.id %>">
-            <h3><strong><%= current_quest.name.capitalize %></strong></h3>
-            <p><%= current_quest.description %></p>
-            <h3>Reward: <%= current_quest.xp %> XP</h3>
-
-            <%= simple_form_for current_quest,as: :quest, url: change_completion_rate_path, method: :post,  remote: true do |f| %>
-              <%= f.input :id, as: :hidden %>
-              <%= f.input :completion_rate, label: " <span data-quest-target='text'>Completion rate: #{current_quest.completion_rate} %</>".html_safe, as: :range, min: 0, max: 100, input_html: {data: { action: "change->quest#slide"}} %>
-              <%= f.button :submit, class: "btn btn-info d-none", data: { target: "quest.submit"}  %>
-            <% end %>
-          </div>
+          <%= render "active_quest", quest: current_quest %>
         <% end %>
       </div>
 
@@ -38,26 +24,14 @@
     <div class="col d-flex flex-column align-items-center">
       <h2>🤠 Most Wanted Baddies 🤠</h2>
       <% @bad_guys.each do |bad_guy| %>
-        <div class="card mb-5 p-2" >
-          <h3><strong><%= bad_guy.name.capitalize %></strong></h3>
-          <p><%= bad_guy.story %></p>
-          <h3>Reward: <%= bad_guy.xp %> XP</h3>
-          <h3>Total XP gained from previously slaying this baddie: <%= bad_guy.total_xp %> XP</h3>
-          <%= link_to "Neutralized!", defeat_bad_guy_path(bad_guy), method: :patch, class: "btn btn-info", remote: true  %>
-        </div>
+       <%= render "bad_guy", bad_guy: bad_guy %>
       <% end %>
     </div>
 
     <div class="col d-flex flex-column align-items-center">
       <h2>⭐ Power Ups! ⭐</h2>
       <% @power_ups.each do |power_up| %>
-        <div class="card mb-5">
-          <h3><strong><%= power_up.name.capitalize %></strong></h3>
-          <p><%= power_up.description %></p>
-          <h3>Reward: <%= power_up.xp %> XP</h3>
-          <h3>Total XP gained from previously slaying this PowerUp: <%= power_up.total_xp %> XP</h3>
-          <%= link_to "Acquire PowerUp!", increase_power_up_path(power_up), method: :patch, class: "btn btn-info", remote: true %>
-        </div>
+        <%= render "power_up", power_up: power_up %>
       <% end %>
     </div>
 

@@ -3,6 +3,7 @@ class BadGuysController < ApplicationController
   def create
     @bad_guy = BadGuy.new(params_bad_guy)
     @bad_guy.profile = current_user.profile
+    @bad_guy.total_xp = 0
     @profile = current_user.profile
     if @bad_guy.save
       flash[:success] = "Badguy successfully created"
@@ -16,7 +17,7 @@ class BadGuysController < ApplicationController
   def update
     @bad_guy = BadGuy.find(params[:id])
     @profile = current_user.profile
-      if @bad_guy.update_attributes(params_bad_guy)
+      if @bad_guy.update(params_bad_guy)
         flash[:success] = "BadGuy was successfully updated"
         redirect_to adventure_path
       else
