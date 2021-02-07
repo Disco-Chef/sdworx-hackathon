@@ -10,7 +10,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="quest_dropdown_<%= quest.id %>">
           <% quest.chosen_strategies.each do |strategy| %>
-            <p class="text-small text-muted"> <%= strategy.personal_strategic_goal %> </p>
+            <p class="text-small text-muted m-1"> <%= strategy.personal_strategic_goal %> </p>
           <% end %>
         </div>
       </div>
