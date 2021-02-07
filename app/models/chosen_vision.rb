@@ -4,4 +4,7 @@ class ChosenVision < ApplicationRecord
 
   has_many :power_up_visions
   has_many :power_ups, through: :power_up_visions
+
+  validates :motto, presence: true
+
 end
