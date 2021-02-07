@@ -9,6 +9,8 @@
         <%= image_tag "http://icons.iconarchive.com/icons/diversity-avatars/avatars/1024/batman-icon.png", class: "avatar-large" %>
       <%end%>
       <p class="text-muted mt-2"><%= @profile.secret_bio  %></p>
+      -
+      <p class="mt-2"> <strong> <%= @profile.chosen_vision.motto %> </strong> </p>
     </div>
     <div class="col-8 card">
       <div class="list-group list-group-flush">
