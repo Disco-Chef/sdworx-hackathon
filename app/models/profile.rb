@@ -9,6 +9,8 @@ class Profile < ApplicationRecord
   has_many :bad_guys
   has_many :power_ups
 
+  validates :nickname, presence: true
+  validates :secret_bio, presence: true
   ORIGIN_STORIES = [
     "$NICKNAME had parents murdered by one of the muggers when he was young while walking home from the movies with their parents. Later discovered that their city was plagued by corrupt officials, inspired them to used their vast family fortune to become $NICKNAME and wage a one-person war on crime.",
     "Born on the planet Krypton, infant $NICKNAME was sent to Earth before an explosion destroyed their home planet. Their strong moral code motivates them to fight for justice.",

@@ -1,0 +1,27 @@
+<div data-controller="quest" class="card mb-5 p-2" id="quest-<%= quest.id %>">
+  <h3><strong><%= quest.name.capitalize %></strong></h3>
+  <p class="text-muted"><%= quest.description %></p>
+  <div class="d-flex w-100 justify-content-between">
+    <p>Reward: <strong><%= quest.xp %> XP </strong></p>
+    <% if quest.chosen_strategies.present? %>
+      <div class="dropdown">
+        <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="quest_dropdown_<%= quest.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            see associated strategies
+        </button>
+  <div class="dropdown-menu" aria-labelledby="quest_dropdown_<%= quest.id %>">
+    <% quest.chosen_strategies.each do |strategy| %>
+      <p class="text-small text-muted"> <%= strategy.personal_strategic_goal %> </p>
+    <% end %>
+  </div>
+</div>
+    <% end %>
+  </div>
+  <% if params[:controller] == "dashboard" %>
+    <%= simple_form_for quest, as: :quest, url: change_completion_rate_path, method: :post,  remote: true do |f| %>
+      <%= f.input :id, as: :hidden %>
+      <%= f.input :completion_rate, label: " <span data-quest-target='text'>Completion rate: #{quest.completion_rate} %</>".html_safe, as: :range, min: 0, max: 100, input_html: {data: { action: "change->quest#slide"}} %>
+      <%= f.button :submit, class: "btn btn-info d-none", data: { target: "quest.submit"}  %>
+    <% end %>
+  <% end %>
+
+</div>

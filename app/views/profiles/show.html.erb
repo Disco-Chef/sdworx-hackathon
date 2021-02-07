@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3 card mr-1 d-flex justify-content-center align-items-center">
+    <div class="col-3 card mr-1 d-flex justify-content-center align-items-center text-center">
 
       <h1><b><%= @profile.nickname %></b></h1>
       <% if @profile&.photo&.attached?%>
@@ -8,51 +8,36 @@
       <%else%>
         <%= image_tag "http://icons.iconarchive.com/icons/diversity-avatars/avatars/1024/batman-icon.png", class: "avatar-large" %>
       <%end%>
+      <p class="text-muted mt-2"><%= @profile.secret_bio  %></p>
     </div>
     <div class="col-8 card">
       <div class="list-group list-group-flush">
         <div class="list-group-item">
           <h2>✔ Completed Quests ✔</h2>
-          <h2>total XP: <%= @profile.completed_quests_xp %> </h2>
+          <p>total XP: <strong> <%= @profile.completed_quests_xp %> XP </strong> </p>
           <% @profile.completed_quests.each do |completed_quest| %>
-            <div class="card mb-1 p-2">
-              <h3><strong><%= completed_quest.name.capitalize %></strong></h3>
-              <p><%= completed_quest.description %></p>
-              <h3>Awarded: <%= completed_quest.xp %></h3>
-            </div>
+            <%= render 'dashboard/completed_quest', quest: completed_quest %>
           <% end %>
         </div>
 
         <div class="list-group-item">
           <h2>📝 Active Quests 📝</h2>
           <% @profile.current_quests.each do |current_quest| %>
-            <div class="card mb-1 p-2">
-              <h3><strong><%= current_quest.name.capitalize %></strong></h3>
-              <p><%= current_quest.description %></p>
-              <h3>Reward: <%= current_quest.xp %></h3>
-            </div>
+            <%= render 'dashboard/active_quest', quest: current_quest %>
           <% end %>
         </div>
        <div class="list-group-item">
           <h2>🤠 Most Wanted Baddies 🤠</h2>
           <h3> Total XP: <%= @profile.bad_guys_xp %> </h3>
           <% @profile.bad_guys.each do |bad_guy| %>
-            <div class="card mb-1 p-2">
-              <h3><strong><%= bad_guy.name.capitalize %></strong></h3>
-              <p><%= bad_guy.story %></p>
-              <h3>Reward: <%= bad_guy.total_xp %></h3>
-            </div>
+            <%= render 'dashboard/bad_guy', bad_guy: bad_guy %>
           <% end %>
         </div>
         <div class="list-group-item">
           <h2>⭐ Power Ups! ⭐</h2>
           <h3> Total XP: <%= @profile.total_power_ups_xp %></h3>
           <% @profile.power_ups.each do |power_up| %>
-            <div class="card mb-1 p-2">
-              <h3><strong><%= power_up.name.capitalize %></strong></h3>
-              <p><%= power_up.description %></p>
-              <h3>Reward/Awarded: <%= power_up.total_xp %></h3>
-            </div>
+            <%= render 'dashboard/power_up', power_up: power_up %>
           <% end %>
         </div>
       </div>

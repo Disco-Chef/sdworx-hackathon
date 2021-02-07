@@ -19,7 +19,7 @@ class QuestsController < ApplicationController
  def update
    @quest = Quest.find(params[:id])
    @profile = current_user.profile
-     if @quest.update_attributes(params_quest)
+     if @quest.update(params_quest)
        flash[:success] = "Quest was successfully updated"
        redirect_to adventure_path
      else
