@@ -1,8 +1,8 @@
 <div class="card mb-5 p-2 w-100" id="bad-guy-<%= bad_guy.id %>" >
   <h3><strong><%= bad_guy.name.capitalize %></strong></h3>
   <p class="text-muted"><%= bad_guy.story %></p>
-  <p>Reward: <%= bad_guy.xp %> XP</p>
   <p>Total XP gained from previously slaying this baddie: <strong><%= bad_guy.total_xp %> XP </strong></p>
+  <p>Reward: <%= bad_guy.xp %> XP</p>
   <% if params[:controller] == "dashboard" %>
     <%= link_to "Neutralized!", defeat_bad_guy_path(bad_guy), method: :patch, class: "btn btn-info", remote: true  %>
   <% end %>

@@ -4,16 +4,16 @@
     <div class="row">
 
       <div class="col d-flex flex-column">
-        <h2>✔ Completed Quests ✔</h2>
-        <% @completed_quests.each do |completed_quest| %>
-          <%= render "completed_quest", quest: completed_quest %>
+        <h2>📝 Active Quests 📝</h2>
+        <% @current_quests.each do |current_quest| %>
+          <%= render "active_quest", quest: current_quest %>
         <% end %>
       </div>
 
       <div class="col d-flex flex-column">
-        <h2>📝 Active Quests 📝</h2>
-        <% @current_quests.each do |current_quest| %>
-          <%= render "active_quest", quest: current_quest %>
+        <h2>✔ Completed Quests ✔</h2>
+        <% @completed_quests.each do |completed_quest| %>
+          <%= render "completed_quest", quest: completed_quest %>
         <% end %>
       </div>
 
@@ -22,16 +22,16 @@
   <div class="row">
 
     <div class="col d-flex flex-column align-items-center">
-      <h2>🤠 Most Wanted Baddies 🤠</h2>
-      <% @bad_guys.each do |bad_guy| %>
-       <%= render "bad_guy", bad_guy: bad_guy %>
+      <h2>⭐ Power Ups! ⭐</h2>
+      <% @power_ups.each do |power_up| %>
+        <%= render "power_up", power_up: power_up %>
       <% end %>
     </div>
 
     <div class="col d-flex flex-column align-items-center">
-      <h2>⭐ Power Ups! ⭐</h2>
-      <% @power_ups.each do |power_up| %>
-        <%= render "power_up", power_up: power_up %>
+      <h2>🤠 Most Wanted Baddies 🤠</h2>
+      <% @bad_guys.each do |bad_guy| %>
+       <%= render "bad_guy", bad_guy: bad_guy %>
       <% end %>
     </div>
 
