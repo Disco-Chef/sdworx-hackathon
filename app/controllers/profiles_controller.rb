@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
   def new
     @profile = current_user.profile || Profile.new
     @chosen_vision = current_user.profile&.chosen_vision || ChosenVision.new
-    @new_chosen_strategy = ChosenStrategy.new
+    @chosen_strategy = ChosenStrategy.new
   end
 
   def create

@@ -6,7 +6,9 @@ class ChosenStrategiesController < ApplicationController
     if @chosen_strategy.save
       redirect_to main_profile_path
     else
-      render :new
+      @profile = current_user.profile || Profile.new
+      @chosen_vision = current_user.profile&.chosen_vision || ChosenVision.new
+      render "profiles/new"
     end
   end
 
@@ -16,7 +18,9 @@ class ChosenStrategiesController < ApplicationController
     if @chosen_strategy.update(chosen_strategy_params)
       redirect_to main_profile_path
     else
-      render :new
+      @profile = current_user.profile || Profile.new
+      @chosen_vision = current_user.profile&.chosen_vision || ChosenVision.new
+      render "profiles/new"
     end
   end
 
