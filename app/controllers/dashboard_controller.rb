@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    @current_quests = current_user.profile.current_quests
+    @current_quests = current_user.profile.current_quests.order(:created_at)
     @completed_quests = current_user.profile.completed_quests
 
     @power_ups = current_user.profile.power_ups

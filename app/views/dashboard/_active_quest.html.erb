@@ -1,4 +1,4 @@
-<div data-controller="quest" class="card mb-5 p-2" id="quest-<%= quest.id %>">
+<div data-controller="quest" class="card mb-5 p-2 w-100" id="quest-<%= quest.id %>">
   <h3><strong><%= quest.name.capitalize %></strong></h3>
   <p class="text-muted"><%= quest.description %></p>
   <div class="d-flex w-100 justify-content-between">
@@ -8,12 +8,12 @@
         <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="quest_dropdown_<%= quest.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             see associated strategies
         </button>
-  <div class="dropdown-menu" aria-labelledby="quest_dropdown_<%= quest.id %>">
-    <% quest.chosen_strategies.each do |strategy| %>
-      <p class="text-small text-muted"> <%= strategy.personal_strategic_goal %> </p>
-    <% end %>
-  </div>
-</div>
+        <div class="dropdown-menu" aria-labelledby="quest_dropdown_<%= quest.id %>">
+          <% quest.chosen_strategies.each do |strategy| %>
+            <p class="text-small text-muted"> <%= strategy.personal_strategic_goal %> </p>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
   <% if params[:controller] == "dashboard" %>
