@@ -8,7 +8,9 @@ class ChosenVisionsController < ApplicationController
     if @chosen_vision.save
       redirect_to main_profile_path
     else
-      render :new
+      profile = current_user.profile || Profile.new
+      @chosen_vision = current_user.profile&.chosen_vision || ChosenVision.new
+      render "profiles/new"
     end
   end
 
@@ -19,7 +21,9 @@ class ChosenVisionsController < ApplicationController
     if @chosen_vision.update(chosen_vision_params)
       redirect_to main_profile_path
     else
-      render :new
+      @profile = current_user.profile || Profile.new
+      @chosen_strategy = ChosenStrategy.new
+      render "profiles/new"
     end
   end
 
