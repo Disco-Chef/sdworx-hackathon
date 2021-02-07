@@ -5,4 +5,6 @@ class Company < ApplicationRecord
   has_many :company_bad_guys
   has_many :company_quests
   has_many :company_power_ups
+
+  validates :name, presence: true
 end
