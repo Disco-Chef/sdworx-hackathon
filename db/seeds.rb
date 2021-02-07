@@ -35,7 +35,7 @@ strategies.each do |strategy|
   Strategy.create! company: company, name: strategy
 end
 
-profile = Profile.create!(user: user_will, nickname: "Spider-Man", secret_bio: "As a young man, I was bittne by a radio-active re-engineered-dna spider. I have at first played with my new powers by making web softwares left and right just for money. But then, something really important happened, so I decided to work on my spidey-software skills to be the best spider-engineer I can think of!" )
+profile = Profile.create!(user: user_will, nickname: "Spider-Man", secret_bio: "As a young man, I was bitten by a radio-active re-engineered-dna spider. I have at first played with my new powers by making web softwares left and right just for money. But then, something really important happened, so I decided to work on my spidey-software skills to be the best spider-engineer I can think of!" )
 
 chosen_vision = Vision.first.chosen_visions.create!(motto: "We bring each other up and bring down those who aim to solely bring down others.", profile: profile)
 

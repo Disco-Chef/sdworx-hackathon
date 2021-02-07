@@ -14,7 +14,7 @@
       <div class="list-group list-group-flush">
         <div class="list-group-item">
           <h2>✔ Completed Quests ✔</h2>
-          <p>total XP: <strong> <%= @profile.completed_quests_xp %> XP </strong> </p>
+          <h3>Total XP: <%= @profile.completed_quests_xp %> XP</h3>
           <% @profile.completed_quests.each do |completed_quest| %>
             <%= render 'dashboard/completed_quest', quest: completed_quest %>
           <% end %>
