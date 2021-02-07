@@ -4,5 +4,4 @@ class Vision < ApplicationRecord
   has_many :profiles, through: :chosen_visions
 
   validates :name, presence: true
-  validates :description, presence: true
 end

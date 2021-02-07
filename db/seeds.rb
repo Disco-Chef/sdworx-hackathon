@@ -28,7 +28,7 @@ user_will = User.create!(
   company: company
 )
 vision = "To be the company that best understands and satisfies the product, service and self-fulfillment needs of people globally"
-Vision.create company: company, name: vision
+Vision.create! company: company, name: vision
 
 strategies = ["Grow shareholder value", "Best value for the cost", "    Acquire new customers from innovative offerings", "    Improve employee retention"]
 strategies.each do |strategy|
