@@ -32,7 +32,7 @@ Vision.create! company: company, name: vision
 
 strategies = ["Grow shareholder value", "Best value for the cost", "    Acquire new customers from innovative offerings", "    Improve employee retention"]
 strategies.each do |strategy|
-  Strategy.create company: company, name: strategy
+  Strategy.create! company: company, name: strategy
 end
 
 profile = Profile.create!(user: user_will, nickname: "Spider-Man", secret_bio: "As a young man, I was bittne by a radio-active re-engineered-dna spider. I have at first played with my new powers by making web softwares left and right just for money. But then, something really important happened, so I decided to work on my spidey-software skills to be the best spider-engineer I can think of!" )
